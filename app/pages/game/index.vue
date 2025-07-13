@@ -7,6 +7,7 @@
             </button>
             <p>player draw: {{player.diceValue}}</p>
             <select v-if="player.diceValue == 6" @change="playersChoice(index)">
+                <option>Choose</option>
                 <option>Draw token</option>
                 <option>Move token</option>
             </select>
