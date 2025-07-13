@@ -37,7 +37,7 @@ async function startTheGame() {
         path: '/game',
         query:{
             numberOfPlayers: pick.value
-        },
+        }
     })
 }
 

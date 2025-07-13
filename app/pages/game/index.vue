@@ -1,9 +1,19 @@
 <template>
     <div>
         <h1>Number of players: {{ route.numberOfPlayers }}</h1>
-        <button v-for="player in buttons" :key="player.label" :disabled="!player.isActive" @click="underClick">
-            <p>Dice: {{ player.label }}</p>
-        </button>
+        <div v-for="(player, index) in players" :key="player.label">        
+            <button :disabled="!player.isActive || player.diceValue == 6" @click="handleClick(index)">
+                <p>Dice: {{ player.label }}</p>
+            </button>
+            <p>player draw: {{player.diceValue}}</p>
+            <select v-if="player.diceValue == 6" @change="playersChoice(index)">
+                <option>Draw token</option>
+                <option>Move token</option>
+            </select>
+            <hr>
+            <br>
+            <br>
+        </div>
     </div>
 </template>
 
@@ -11,39 +21,37 @@
 <script setup>
     const route = useRoute().query;
 
-    // giving to user dice based on their choice
-    const buttons = ref([]);
+    // giving dice to user acording to number of players
+    const players = ref([]);
     onMounted(() =>{
         for(let i = 0; i < route.numberOfPlayers; i++){
-            const buttonData = {label: i +1, isActive: true};
+            const playerData = {label: i + 1, isActive: true, diceValue: 0 };
             if(i > 0){
-                buttonData.isActive = false;
+                playerData.isActive = false;
             }
-            buttons.value.push(buttonData);
+            players.value.push(playerData);
         }
     })
-    const underClick = () =>{
-        const rndInt = Math.floor(Math.random() * 6 + 1);
-        console.log(rndInt);
 
-        // buttons.value[0] = {label: 1, isActive: false}
-        // buttons.value[1] = {label: 2, isActive: true}
-
-        let itemPosition = 0;
-        for(let i = 0; i < route.numberOfPlayers; i++){
-            if(buttons.value[i].isActive == true){
-                buttons.value[i].isActive = false;
-                itemPosition = i;
-                break;
-            }
+    const handleClick = (index) =>{
+        const randomDiceOutput = Math.floor(Math.random() * 6 + 1);
+        console.log(randomDiceOutput)
+        players.value[index].diceValue = randomDiceOutput
+        if(randomDiceOutput == 6){
+            return;
         }
-        if (itemPosition + 1 == route.numberOfPlayers) {
-            buttons.value[0].isActive = true;
+        
+        players.value[index].isActive = false;
+        if (index + 1 == route.numberOfPlayers) {
+            players.value[0].isActive = true;
         } else {
-            buttons.value[itemPosition +1].isActive = true;
+            players.value[index +1].isActive = true;
         }
-       
+    }
 
+    const playersChoice =(index) =>{
+        players.value[index].diceValue = 0;
     }
 
 </script>
+
