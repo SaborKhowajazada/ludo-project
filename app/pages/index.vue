@@ -32,7 +32,7 @@
 
 const pick = ref("2")
 async function startTheGame() {
-    console.log("The game starts with ", pick.value, " people")
+    console.log("The game starts with", pick.value, "people")
     await navigateTo({
         path: '/game',
         query:{
