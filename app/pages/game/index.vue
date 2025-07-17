@@ -51,6 +51,7 @@
             return;
         }
         
+        //The dice value is not showing up when the player draw a number
         players.value[index].diceValue = 0;
         players.value[index].isActive = false;
         if (index + 1 == route.numberOfPlayers) {
