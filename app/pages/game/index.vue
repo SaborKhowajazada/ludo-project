@@ -4,10 +4,9 @@
         <div v-for="(player, index) in players" :key="player.label" :class="['player-aria', {'is-not-active': !player.isActive}]">    
             <p>player {{index + 1}}</p>    
 
-            <ludo-dice :dice-disabled="!player.isActive || player.diceValue != 0" @click="handleClick(index)"/>
-            <p>The player draw: {{player.diceValue}}</p>
+            <ludo-dice :dice-value="player.diceValue" :dice-disabled="!player.isActive || player.diceValue != 0" @click="handleClick(index)"/>
 
-            <game-token v-for="token in player.insideTokens" :key="token.label"  :token-disabled="player.diceValue != 6"  :label="'insideTokens'" :color="player.diceColor" @click="insideTokenHandle(index)"/>
+            <game-token v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6"  :label="'insideTokens'" :color="player.diceColor" @click="insideTokenHandle(index)"/>
             <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.diceColor" @click="outSideTokenHandle(index, token.id)"/>
 
         </div>
@@ -45,7 +44,7 @@
 
     const handleClick = (index) =>{
         const randomDiceOutput = Math.floor(Math.random() * 6 + 1);
-        // console.log(randomDiceOutput);
+        //console.log(randomDiceOutput);
         players.value[index].diceValue = randomDiceOutput
         if(randomDiceOutput == 6 || players.value[index].outSideTokens.length != 0 ){
             return;
