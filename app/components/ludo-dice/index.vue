@@ -1,7 +1,6 @@
 <template>
     <button class="button-style" :disabled="diceDisabled" @click="onClick" >
-        <LudoDiceDiceFaceOne v-if="diceValue == 0"/>
-        <LudoDiceDiceFaceOne v-if="diceValue == 1" />
+        <LudoDiceDiceFaceOne v-if="diceValue == 0 || diceValue == 1"/>
         <LudoDiceDiceFaceTwo v-else-if="diceValue == 2"/>
         <LudoDiceDiceFaceThree v-else-if="diceValue == 3"/>
         <LudoDiceDiceFaceFour v-else-if="diceValue == 4"/>

@@ -1,16 +1,16 @@
 <template>
-    <div>
-        <h1>Number of players: {{ route.numberOfPlayers }}</h1>
-        <div v-for="(player, index) in players" :key="player.label" :class="['player-aria', {'is-not-active': !player.isActive}]">    
+    <ludo-board>
+        <div v-for="(player, index) in players" :key="player.label" :class="['player-aria', {'is-not-active' :!player.isActive}]">    
             <p>player {{index + 1}}</p>    
 
-            <ludo-dice :dice-value="player.diceValue" :dice-disabled="!player.isActive || player.diceValue != 0" @click="handleClick(index)"/>
+            <ludo-dice :dice-value="player.diceValue" :dice-disabled="!player.diceCanBeClicked" @click="handleClick(index)"/>
 
-            <game-token v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6"  :label="'insideTokens'" :color="player.diceColor" @click="insideTokenHandle(index)"/>
+            <game-token v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.diceColor" @click="insideTokenHandle(index)"/>
             <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.diceColor" @click="outSideTokenHandle(index, token.id)"/>
+            
 
         </div>
-    </div>
+    </ludo-board>
 </template>
 
 
@@ -26,6 +26,7 @@
                 label: i + 1, 
                 isActive: true, 
                 diceValue: 0,
+                diceCanBeClicked: true,
                 diceColor: diceColors[i],
                 insideTokens: [
                   {label: 'token inside'},  
@@ -46,13 +47,16 @@
         const randomDiceOutput = Math.floor(Math.random() * 6 + 1);
         //console.log(randomDiceOutput);
         players.value[index].diceValue = randomDiceOutput
+        players.value[index].diceCanBeClicked = false;
         if(randomDiceOutput == 6 || players.value[index].outSideTokens.length != 0 ){
             return;
         }
         
         //The dice value is not showing up when the player draw a number
-        players.value[index].diceValue = 0;
+        players.value[index].diceCanBeClicked = true;
+        //players.value[index].diceValue = 0;
         players.value[index].isActive = false;
+
         if (index + 1 == route.numberOfPlayers) {
             players.value[0].isActive = true;
         } else {
@@ -62,6 +66,7 @@
 
     const insideTokenHandle = (index) =>{
         players.value[index].diceValue = 0;
+        players.value[index].diceCanBeClicked = true;
 
         players.value[index].insideTokens.pop(); 
 
@@ -73,6 +78,7 @@
     }
 
     const outSideTokenHandle = (index, itemId) =>{
+        players.value[index].diceCanBeClicked = true;
         const newPosition = players.value[index].diceValue + players.value[index].outSideTokens.find((item) =>item.id == itemId).position;
         players.value[index].outSideTokens.find((item) =>item.id == itemId).position = newPosition
 
