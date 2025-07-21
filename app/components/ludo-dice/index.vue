@@ -6,12 +6,13 @@
         <LudoDiceDiceFaceFour v-else-if="diceValue == 4"/>
         <LudoDiceDiceFaceFive v-else-if="diceValue == 5"/>
         <LudoDiceDiceFaceSex v-else-if="diceValue == 6" />
+        <GameToken :color="color"/>
     </button>
 </template>
 
 
 <script setup>
-    defineProps(['diceDisabled', 'diceValue']);
+    defineProps(['diceDisabled', 'diceValue', 'color']);
 
     const emits = defineEmits(['click']);
     const onClick = ()=>{
@@ -24,6 +25,7 @@
     .button-style{
         border: none;
         padding: 0px;
+        
     }
 </style>
 
