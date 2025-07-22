@@ -76,5 +76,3 @@ form {
     color: rgba(255, 0, 0, 0.883);
 }
 </style>
-
-

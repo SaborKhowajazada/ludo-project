@@ -2,12 +2,12 @@
     <main class="board"> 
         <div v-for="(player, index) in players" :key="player.label" :class="['player-aria']">    
 
-            <ludo-dice v-if="player.isActive" :color="player.diceColor" :dice-value="player.diceValue" :dice-disabled="!player.diceCanBeClicked" @click="handleClick(index)"/>
+            <ludo-dice v-if="player.isActive" :color="player.tokenColor" :dice-value="player.diceValue" :dice-disabled="!player.diceCanBeClicked" @click="handleClick(index)"/>
 
             <div class="player-tokens">
-            <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.diceColor" @click="insideTokenHandle(index)"/>
+            <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.tokenColor" @click="insideTokenHandle(index)"/>
             </div>
-            <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.diceColor" @click="outSideTokenHandle(index, token.id)"/>
+            <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.tokenColor" @click="outSideTokenHandle(index, token.id)"/>
         </div>
     </main>
 </template>
@@ -20,14 +20,14 @@
     // giving dice to user acording to number of players
     const players = ref([]);
     onMounted(() =>{
-        const diceColors = ["green", "blue", "red", "yellow"];
+        const tokenColors = ["green", "blue", "red", "yellow"];
         for(let i = 0; i < props.numberOfPlayers; i++){
             const playerData = { 
                 label: i + 1, 
                 isActive: true, 
                 diceValue: 0,
                 diceCanBeClicked: true,
-                diceColor: diceColors[i],
+                tokenColor: tokenColors[i],
                 insideTokens: [
                   {label: 'token inside'},  
                   {label: 'token inside'},  
