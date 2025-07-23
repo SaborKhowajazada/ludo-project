@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="highlight"><span class="text-design">Welcome</span> To <span class="text-design">The</span> Ludo
-            <span class="text-design">Game</span></div>
+            <span class="text-design">Game</span>
+        </div>
         <h2 class="text-h-two">Play with friends</h2>
         <form id="player-form" @submit.prevent="startTheGame">
             <label><input v-model="pick" type="radio" name="players" value="2"> <span class="text-design">2

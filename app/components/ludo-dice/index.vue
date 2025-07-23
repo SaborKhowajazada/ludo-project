@@ -1,5 +1,5 @@
 <template>
-    <GameToken :color="color"/>
+    <GameToken :color="color" />
     <button class="button-style" :disabled="diceDisabled" @click="onClick" >
         <LudoDiceDiceFaceOne v-if="diceValue == 0 || diceValue == 1"/>
         <LudoDiceDiceFaceTwo v-else-if="diceValue == 2"/>
