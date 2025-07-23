@@ -1,13 +1,24 @@
 <template>
     <main class="board"> 
-        <div v-for="(player, index) in players" :key="player.label" :class="['player-aria']">    
-
-            <ludo-dice v-if="player.isActive" :color="player.tokenColor" :dice-value="player.diceValue" :dice-disabled="!player.diceCanBeClicked" @click="handleClick(index)"/>
-
+        <div 
+            v-for="(player, index) in players" 
+            :key="player.label" 
+            :class="['player-area', { 'is-not-top': index == 2 || index == 3}, `player-${player.label}`]"
+        >    
+            <ludo-path class="path" :player-number="player.label"/>
+            <div class="initial-cell">
+            <ludo-dice 
+                :is-active="player.isActive" 
+                :color="player.tokenColor" 
+                :dice-value="player.diceValue" 
+                :dice-disabled="!player.diceCanBeClicked" 
+                @click="handleClick(index)"
+            />
             <div class="player-tokens">
-            <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.tokenColor" @click="insideTokenHandle(index)"/>
+                <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.tokenColor" @click="insideTokenHandle(index)"/>
             </div>
             <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.tokenColor" @click="outSideTokenHandle(index, token.id)"/>
+            </div>
         </div>
     </main>
 </template>
@@ -98,9 +109,40 @@
 </script>
 
 
-<style>
+<style scoped>
+/* .initial-cell {
+    border: 3px solid green;
+} */
+.player-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.player-1 {
+    flex-direction: column-reverse;
+    border: 3px solid green;
+}
+
+.player-2 {
+    flex-direction: row;
+    border: 3px solid blue;
+}
+
+.player-3 {
+    flex-direction: row-reverse;
+    border: 3px solid red
+}
+
+.player-4 {
+    flex-direction: column;
+    border: 3px solid yellow;
+}
+/* .player-area.is-not-top {
+    flex-direction: column-reverse;
+} */
+
 .player-tokens {
-    border: 1px solid red;
     margin-bottom: 0px;
 }
 .is-not-active{
@@ -111,29 +153,29 @@
 .board{
     border: 1px solid red;
     min-height: 70vh;
-    max-width: 70vh;
+    max-width: 70vw;
     margin: 0px 0px;
     display: grid;
     grid-template-areas: 
-        "pOne squares pTwo" 
-        "squaresOne squaresTwo squaresThree" 
-        "pThree squaresFour pFour";
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+        "pOne pTwo" 
+        "pThree pFour";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 24px;
 }
 
-.player-aria:first-child {
+.player-area:first-child {
     grid-area: pOne;
 }
 
-.player-aria:nth-child(2){
+.player-area:nth-child(2){
     grid-area: pTwo;
 }
 
-.player-aria:nth-child(3){
+.player-area:nth-child(3){
     grid-area: pThree;
 }
-.player-aria:last-child{
+.player-area:last-child{
     grid-area: pFour;
 }
 
