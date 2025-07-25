@@ -1,10 +1,12 @@
 <template>
   <div :class="['path-container', `player-path-${playerNumber}`]">
+
     <div class="path path1">
       <div v-for="cell in cells" :key="cell" class="cell">
         {{ cell }}
       </div>
     </div>
+
     <div class="path path2">
       <div v-for="cell in cells" :key="cell" class="cell">
         {{ cell }}
@@ -13,11 +15,13 @@
         7
       </div>
     </div>
+
     <div class="path path3">
       <div v-for="cell in cells" :key="cell" class="cell">
         {{ cell }}
       </div>
     </div>
+
   </div>
 </template>
 
@@ -31,9 +35,6 @@ defineProps(['playerNumber'])
   display: flex;
 }
 
-.player-path-1 {
-  flex-direction: column;
-}
 
 .player-path-1 .path {
   display: flex;
@@ -55,10 +56,29 @@ defineProps(['playerNumber'])
   flex-direction: column-reverse;
 } 
 
+
+.player-path-1 {
+  flex-direction: column;
+  grid-area: 2 / 1 / 3 / 3;
+}
+
+
+.player-path-2{
+  grid-area: 1/1/3/2;
+
+}
+
+.player-path-3{
+  grid-area: 3 / 2 / 1 / 3;
+}
+
+.player-path-4{
+  grid-area: 1 / 1 / 2 / 3;
+}
+
 .path {
   width: 48px;
 }
-
 
 
 .cell {

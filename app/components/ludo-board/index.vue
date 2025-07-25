@@ -7,13 +7,13 @@
         >    
             <ludo-path class="path" :player-number="player.label"/>
             <div class="initial-cell">
-            <ludo-dice 
+            <!-- <ludo-dice 
                 :is-active="player.isActive" 
                 :color="player.tokenColor" 
                 :dice-value="player.diceValue" 
                 :dice-disabled="!player.diceCanBeClicked" 
                 @click="handleClick(index)"
-            />
+            /> -->
             <div class="player-tokens">
                 <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.tokenColor" @click="insideTokenHandle(index)"/>
             </div>
@@ -122,29 +122,66 @@
 .player-1 {
     flex-direction: column-reverse;
     border: 3px solid green;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
+.player-1 .initial-cell{
+    grid-area: 1/1/2/2;
+}
+
 
 .player-2 {
     flex-direction: row;
     border: 3px solid blue;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+.player-2 .initial-cell{
+    grid-area: 1/2/2/3;
 }
 
 .player-3 {
     flex-direction: row-reverse;
-    border: 3px solid red
+    border: 3px solid red;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
+
+.player-3 .initial-cell{
+    grid-area: 2 / 1 / 3 / 2;
+}
+
 
 .player-4 {
     flex-direction: column;
     border: 3px solid yellow;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
+
+.player-4 .initial-cell{
+    grid-area: 2 / 2 / 3 / 3;
+}
+
 /* .player-area.is-not-top {
     flex-direction: column-reverse;
 } */
 
 .player-tokens {
     margin-bottom: 0px;
+    border: 3px solid red;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    
 }
+
 .is-not-active{
     pointer-events: none;
     cursor: not-allowed;
