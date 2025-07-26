@@ -151,7 +151,7 @@
 .player-2 {
     flex-direction: row;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2fr 4.2fr 0.7fr;
     grid-template-rows: repeat(2, 1fr);
 }
 .player-2 .initial-cell{
@@ -162,20 +162,20 @@
 .player-3 {
     flex-direction: row-reverse;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 0.70fr 4.2fr 2fr;
     grid-template-rows: repeat(2, 1fr);
 }
-
+ 
 .player-3 .initial-cell{
-    grid-area: 1 / 1 / 3 / 2;
+    grid-area: 1 / 2 / 3 / 3;
     border-color: red;
 }
-
+/* 1 / 2 / 3 / 3 */
 
 .player-4 {
     flex-direction: column;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:4fr 2fr 1fr;
     grid-template-rows: 1fr 2fr;
 }
 
@@ -238,6 +238,15 @@
     grid-area: 1/1/2/2;
 }
 
+.dice-2{
+    grid-area: 1/3/2/4;
+}
 
+.dice-3{
+    grid-area: 1/1/2/2;
+}
 
+.dice-4{
+    grid-area: 2/3/3/4;
+}
 </style>

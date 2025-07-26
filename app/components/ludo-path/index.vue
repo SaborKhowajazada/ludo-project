@@ -108,7 +108,6 @@ defineProps(['playerNumber'])
 }
 
 
-
 .player-path-2{
   grid-area: 1/1/3/2;
 }
@@ -119,8 +118,9 @@ defineProps(['playerNumber'])
 }
 
 .player-path-3{
-  grid-area: 3 / 2 / 1 / 3;
+  grid-area: 1 / 3 / 3 / 4;
 }
+
 
 .player-path-4{
   grid-area: 1 / 1 / 2 / 3;
