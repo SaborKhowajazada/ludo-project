@@ -5,7 +5,7 @@
             :key="player.label" 
             :class="['player-area', { 'is-not-top': index == 2 || index == 3}, `player-${player.label}`]"
         >    
-            <ludo-path class="path" :player-number="player.label"/>
+            <ludo-path :player-number="player.label"/>
             <div class="initial-cell">
             <!-- <ludo-dice 
                 :is-active="player.isActive" 
@@ -110,9 +110,9 @@
 
 
 <style scoped>
-/* .initial-cell {
-    border: 3px solid green;
-} */
+.initial-cell {
+    border: 70px solid green;
+}
 .player-area {
     display: flex;
     flex-direction: column;
@@ -121,50 +121,49 @@
 
 .player-1 {
     flex-direction: column-reverse;
-    border: 3px solid green;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 2fr 1fr;
 }
 .player-1 .initial-cell{
-    grid-area: 1/1/2/2;
+    grid-area: 1/1/2/3;
 }
 
 
 .player-2 {
     flex-direction: row;
-    border: 3px solid blue;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(2, 1fr);
 }
 .player-2 .initial-cell{
-    grid-area: 1/2/2/3;
+    grid-area: 1/2/3/3;
+    border-color: blue;
 }
 
 .player-3 {
     flex-direction: row-reverse;
-    border: 3px solid red;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(2, 1fr);
 }
 
 .player-3 .initial-cell{
-    grid-area: 2 / 1 / 3 / 2;
+    grid-area: 1 / 1 / 3 / 2;
+    border-color: red;
 }
 
 
 .player-4 {
     flex-direction: column;
-    border: 3px solid yellow;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 1fr 2fr;
 }
 
 .player-4 .initial-cell{
-    grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2/ 1 / 3 / 3;
+    border-color: yellow;
 }
 
 /* .player-area.is-not-top {
@@ -172,8 +171,8 @@
 } */
 
 .player-tokens {
+    border: 3px solid black;
     margin-bottom: 0px;
-    border: 3px solid red;
     width: 100%;
     height: 100%;
     display: grid;
@@ -188,17 +187,17 @@
 }
 
 .board{
-    border: 1px solid red;
-    min-height: 70vh;
-    max-width: 70vw;
-    margin: 0px 0px;
+    border: 3px solid black;
+    min-height: 90vh;
+    max-width: 90vh;
+    margin-inline: auto;
     display: grid;
     grid-template-areas: 
-        "pOne pTwo" 
-        "pThree pFour";
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 24px;
+        "pOne pTwo pTwo" 
+        "pOne square pFour "
+        "pThree pThree pFour";
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 2fr 1fr 2fr;
 }
 
 .player-area:first-child {

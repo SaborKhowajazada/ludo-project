@@ -2,22 +2,22 @@
   <div :class="['path-container', `player-path-${playerNumber}`]">
 
     <div class="path path1">
-      <div v-for="cell in cells" :key="cell" class="cell">
+      <div v-for="cell in cells" :key="cell" :class="['cell', `cell-${ cell }`]" >
         {{ cell }}
       </div>
     </div>
 
     <div class="path path2">
-      <div v-for="cell in cells" :key="cell" class="cell">
+      <div v-for="cell in cells" :key="cell" :class="['cell', `cell-${ cell }`]">
         {{ cell }}
       </div>
-      <div class="cell">
+      <!-- <div class="cell">
         7
-      </div>
+      </div> -->
     </div>
 
     <div class="path path3">
-      <div v-for="cell in cells" :key="cell" class="cell">
+      <div v-for="cell in cells" :key="cell" :class="['cell', `cell-${ cell }`]">
         {{ cell }}
       </div>
     </div>
@@ -31,6 +31,52 @@ defineProps(['playerNumber'])
 </script>
 
 <style scoped>
+
+
+.player-path-1 .path1 .cell-2,
+.player-path-1 .path2 .cell-2,
+.player-path-1 .path2 .cell-3, 
+.player-path-1 .path2 .cell-4, 
+.player-path-1 .path2 .cell-5, 
+.player-path-1 .path2 .cell-6,
+.player-path-1 .path3 .cell-3
+ {
+  background-color: green;
+}
+
+.player-path-2 .path3 .cell-2,
+.player-path-2 .path2 .cell-2,
+.player-path-2 .path2 .cell-3,
+.player-path-2 .path2 .cell-4,
+.player-path-2 .path2 .cell-5,
+.player-path-2 .path2 .cell-6,
+.player-path-2 .path1 .cell-3
+{
+  background-color: blue;
+}
+
+.player-path-3 .path1 .cell-2,
+.player-path-3 .path2 .cell-2,
+.player-path-3 .path2 .cell-3,
+.player-path-3 .path2 .cell-4,
+.player-path-3 .path2 .cell-5,
+.player-path-3 .path2 .cell-6,
+.player-path-3 .path3 .cell-3
+{
+  background-color: red;
+}
+
+.player-path-4 .path3 .cell-2,
+.player-path-4 .path2 .cell-2,
+.player-path-4 .path2 .cell-3,
+.player-path-4 .path2 .cell-4,
+.player-path-4 .path2 .cell-5,
+.player-path-4 .path2 .cell-6,
+.player-path-4 .path1 .cell-3
+{
+  background-color: yellow;
+}
+
 .path-container {
   display: flex;
 }
@@ -38,7 +84,6 @@ defineProps(['playerNumber'])
 
 .player-path-1 .path {
   display: flex;
-  width: 400px;
 } 
 
 .player-path-4 {
@@ -48,7 +93,6 @@ defineProps(['playerNumber'])
 .player-path-4 .path {
   display: flex;
   flex-direction: row-reverse;
-  width: 400px;
 } 
 
 .player-path-3 .path {
@@ -62,10 +106,13 @@ defineProps(['playerNumber'])
   grid-area: 2 / 1 / 3 / 3;
 }
 
-
 .player-path-2{
   grid-area: 1/1/3/2;
 
+}
+.player-path-2 .path{
+  display: flex;
+  flex-direction: column;
 }
 
 .player-path-3{
@@ -77,13 +124,14 @@ defineProps(['playerNumber'])
 }
 
 .path {
-  width: 48px;
+  width: 100%;
+  height: 100%;
 }
 
 
 .cell {
-  width: 48px;
-  height: 48px;
-  border: 2px solid greenyellow;
+  width: 100%;
+  height: 100%;
+  border: 3px solid black;
 }
 </style>
