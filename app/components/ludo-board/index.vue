@@ -6,18 +6,31 @@
             :class="['player-area', { 'is-not-top': index == 2 || index == 3}, `player-${player.label}`]"
         >    
             <ludo-path :player-number="player.label"/>
-            <div class="initial-cell">
-            <!-- <ludo-dice 
+            <ludo-dice 
+                :class="[`dice-${player.label}`]"
                 :is-active="player.isActive" 
                 :color="player.tokenColor" 
                 :dice-value="player.diceValue" 
                 :dice-disabled="!player.diceCanBeClicked" 
                 @click="handleClick(index)"
-            /> -->
+            />
+            <div class="initial-cell">
+
             <div class="player-tokens">
-                <game-token  v-for="token in player.insideTokens" :key="token.label" :token-disabled="player.diceValue != 6" :label="'insideTokens'" :color="player.tokenColor" @click="insideTokenHandle(index)"/>
+                <game-token
+                    v-for="token in player.insideTokens" 
+                    :key="token.label" 
+                    :token-disabled="player.diceValue != 6" 
+                    :label="'insideTokens'" :color="player.tokenColor" 
+                    @click="insideTokenHandle(index)"/>
             </div>
-            <game-token v-for="token in player.outSideTokens" :key="token.label"  :token-disabled="player.diceValue == 0"  :label="`token outside moved ${ token.position } steps`" :color="player.tokenColor" @click="outSideTokenHandle(index, token.id)"/>
+            <game-token
+                v-for="token in player.outSideTokens" 
+                :key="token.label"  
+                :token-disabled="player.diceValue == 0"  
+                :label="`token outside moved ${ token.position } steps`" 
+                :color="player.tokenColor" 
+                @click="outSideTokenHandle(index, token.id)"/>
             </div>
         </div>
     </main>
@@ -45,7 +58,11 @@
                   {label: 'token inside'},  
                   {label: 'token inside'},  
                 ],
-                outSideTokens: [] 
+                outSideTokens: [],
+                // greenTokenPosition:[],
+                // bluTokenPosition:[],
+                // redTokenPosition:[],
+                // yellowTokenPosition:[]
             };
             if(i > 0){
                 playerData.isActive = false;
@@ -105,6 +122,7 @@
         } else {
             players.value[index +1].isActive = true;
         }
+
     }
 </script>
 
@@ -122,11 +140,11 @@
 .player-1 {
     flex-direction: column-reverse;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 4fr 2fr;
     grid-template-rows: 2fr 1fr;
 }
 .player-1 .initial-cell{
-    grid-area: 1/1/2/3;
+    grid-area: 1/2/2/4;
 }
 
 
@@ -189,16 +207,17 @@
 .board{
     border: 3px solid black;
     min-height: 90vh;
-    max-width: 90vh;
+    max-width: 110vh;
     margin-inline: auto;
     display: grid;
     grid-template-areas: 
-        "pOne pTwo pTwo" 
-        "pOne square pFour "
-        "pThree pThree pFour";
-    grid-template-columns: 2fr 1fr 2fr;
+        "pOne pOne pTwo pTwo pTwo"
+        "pOne pOne square pFour pFour"
+        "pThree pThree pThree pFour pFour";
+    grid-template-columns: 1fr 4fr 2fr 4fr 1fr;
     grid-template-rows: 2fr 1fr 2fr;
 }
+
 
 .player-area:first-child {
     grid-area: pOne;
@@ -214,5 +233,11 @@
 .player-area:last-child{
     grid-area: pFour;
 }
+
+.dice-1{
+    grid-area: 1/1/2/2;
+}
+
+
 
 </style>

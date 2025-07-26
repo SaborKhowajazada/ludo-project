@@ -103,13 +103,16 @@ defineProps(['playerNumber'])
 
 .player-path-1 {
   flex-direction: column;
-  grid-area: 2 / 1 / 3 / 3;
+  grid-area: 2 / 2 / 3 / 4;
+  
 }
+
+
 
 .player-path-2{
   grid-area: 1/1/3/2;
-
 }
+
 .player-path-2 .path{
   display: flex;
   flex-direction: column;
